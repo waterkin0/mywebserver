@@ -55,9 +55,8 @@ void threadpool<T>::work(){
         if(requests.empty()) continue;
         T* t = requests.front();
         //对t进行处理
-        // t->process();
+        t->process();
         //cout << "!!!线程开始运行指定程序" << endl;
-        resetfd(http::epollfd, t->getsockfd());
         requests.pop();
     }
     // tmp =  "thread " + mystring + " going to die!";

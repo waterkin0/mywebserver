@@ -1,5 +1,5 @@
-#ifndef SETTING
-#define SETTING
+#ifndef SETTING_H
+#define SETTING_H
 
 #include <iostream>
 #include <functional>
