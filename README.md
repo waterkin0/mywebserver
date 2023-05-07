@@ -3,6 +3,8 @@
  一个c++编写的运行在linux上的服务器
 根据进度更新版本
 
+相关讲解在[我的博客](https://waterkin.top/categories/webserver/)上有，但还没更新完
+
 # 0.1
 
 只有线程池，epoll相关，但后续发现有些错误，这版可信度不高
