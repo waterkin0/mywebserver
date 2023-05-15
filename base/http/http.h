@@ -1,13 +1,8 @@
 #ifndef HTTP_H
 #define HTTP_H
 
-//同意ET模式了
-//设置读取文件的名称m_real_file大小
-#define FILENAME_SIZE 200
-//设置读缓冲区m_read_buf大小
-#define READ_SIZE 2048
-//设置写缓冲区m_write_buf大小
-#define WRITE_SIZE 1024
+//统一ET模式了
+#include "../../setting/setting.h"
 
 #include <netinet/in.h>
 #include <sys/epoll.h>

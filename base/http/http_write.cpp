@@ -29,7 +29,6 @@ bool http::write() {
         }
         if (temp == -1) { //出现错误
             if (errno == EAGAIN) { //错误是缓冲区已满
-                cout << "缓冲区已满" << endl;
                 if (myhttp.sendsize_all >= iv[0].iov_len) {//当前已经把头发完了，不需要再发头了
                     //不再继续发送头部信息
                     iv[0].iov_len = 0;
@@ -132,8 +131,10 @@ bool http::process_write(HTTP_CODE ret) {
 }
 
 bool http::add_response(const char *format, ...) {
-    if (writesize_now >= WRITE_SIZE)
+    if (writesize_now >= WRITE_SIZE){
+        LOG_WRITE("writebuf max");
         return false;
+    }
     va_list arg_list;
     va_start(arg_list, format);
     int len = vsnprintf(writebuf + writesize_now, WRITE_SIZE - 1 - writesize_now, format, arg_list);
@@ -150,7 +151,7 @@ bool http::add_stateline(int status,const char* title) {
 bool http::add_headers(int content_len) {
     add_response("Content-Length:%d\r\n",content_len);//响应报文的长度
     add_response("Connection:%s\r\n",(myhttp.alive == true)?"keep-alive":"close");//连接是否持续
-    add_response("Content-Type:%s\r\n","text/html");//返回类型
+    //add_response("Content-Type:%s\r\n","text/html");//返回类型
     add_response("%s","\r\n");//空行
     return true;
 }

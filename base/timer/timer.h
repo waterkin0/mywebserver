@@ -1,10 +1,11 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#define TIMEOUT 3
+#include "../../setting/setting.h"
 
 #include <signal.h>
 #include <assert.h>
+#include "../log/log.h"
 #include "../http/http.h"
 
 class timer//定时器，即链表节点

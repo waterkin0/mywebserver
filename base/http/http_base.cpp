@@ -62,6 +62,7 @@ void http::init(int sockfd,const sockaddr_in &addr){
 bool http::readall(){
     // cout << "开始读数据：" << sockfd << endl;
     if(readsize_now >= READ_SIZE){
+        LOG_WRITE("readbuf max");
         return false;
     }
     while(true){
@@ -69,6 +70,7 @@ bool http::readall(){
         if(byte_read == -1){
             if(errno == EAGAIN || errno == EWOULDBLOCK)//对非阻塞socket而言,EAGAIN不是一种错误,在这里是读完了
                break;
+            LOG_WRITE("recv failed: " + string(strerror(errno)));
             return false;
         }
         else if(byte_read==0){
@@ -88,6 +90,7 @@ void http::process() {
     }
     bool write_ret = process_write(ret);//创建返回报文
     if (!write_ret) {
+        LOG_WRITE("send message failed");
         removefd(epollfd, sockfd);
         sockfd = -1;
         user_num--;

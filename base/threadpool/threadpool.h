@@ -1,7 +1,7 @@
 #ifndef THREADPOOL_H
 #define THREADPOOL_H
-#define MAX_THREADPOOL_NUM 10 //线程池的线程数
-#define MAX_REQUESTS_NUM 10000 //请求队列中允许的最大请求数
+
+#include "../../setting/setting.h"
 
 #include <queue>
 #include <vector>
@@ -9,6 +9,7 @@
 #include <iostream>
 #include "../sqlconnect.h"
 #include "lock.h"
+#include "../timer/timer.h"
 #include <sstream>
 #include <typeinfo>
 using namespace std;
@@ -68,6 +69,7 @@ bool threadpool<T>::appendrequest(T* t){
     if (is_run){
         std::unique_lock<std::mutex> lock(mux);
         if (requests.size() >= MAX_REQUESTS_NUM){
+            LOG_WRITE("requests num max, now max is: " + to_string(MAX_REQUESTS_NUM));
             lock.unlock();
             return false;
         }
@@ -98,7 +100,7 @@ void threadpool<T>::stop(){
             thd.join();
         }
     }
-    cout<< "线程池已被清空" << endl;
+    //cout<< "线程池已被清空" << endl;
 }
 
 #endif

@@ -181,6 +181,7 @@ HTTP_CODE http::parse_headers(char *text) {
         myhttp.host = text;
     }
     else{
+        LOG_WRITE("unknown header:" + string(text));
         //cout << "unknow header: " << text << endl;
     }
     return NO_REQUEST;

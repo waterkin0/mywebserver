@@ -1,4 +1,8 @@
-#include "./setting/setting.h"
+#include <iostream>
+#include <functional>
+#include "setting/setting.h"
+#include "base/webserver.h"
+
 
 int main(){
     webserver server;
@@ -27,4 +31,6 @@ int main(){
 
 //并发出错
 //先alive再不alive出错
-//链表出现自己指向自己，赋值时出错
+//链表出现自己指向自己，赋值时出错,双向链表在增加节点时出错
+
+//注意log的路径是相对于运行路径，而不是写在那个文件的路径，淦

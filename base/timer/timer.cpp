@@ -72,7 +72,7 @@ void timer_list::tick() {
     while (tmp) {//从头依次检查
         if (cur < tmp->expire)
             break;
-        //cout << "连接超时,服务器断开连接，当前用户数" << --http::user_num << endl;
+        LOG_WRITE("time out, client: " + to_string(tmp->sockfd) + " disconnect, usernum: " + to_string(http::user_num));
         removefd(timer_util::epollfd, tmp->sockfd);
         head = head->next;
         if (head)
