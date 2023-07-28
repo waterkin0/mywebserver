@@ -3,7 +3,7 @@
  一个c++编写的运行在linux上的服务器
 根据进度更新版本
 
-相关讲解在[我的博客](https://waterkin.top/categories/webserver/)上有，但还没更新完
+相关讲解在[我的博客](https://waterkin.top/categories/webserver/)上有，基本更新完毕
 
 # 0.1
 
